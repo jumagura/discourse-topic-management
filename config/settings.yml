@@ -1,0 +1,11 @@
+plugins:
+  discourse_topic_management_enabled:
+    default: false
+  discourse_topic_management_hidden_category_id:
+    type: category
+    client: true
+    default: ""
+  discourse_topic_management_categories_remove_button_visible:
+    type: category_list
+    client: true
+    default: ""

@@ -1,0 +1,6 @@
+en:
+  js:
+    topic:
+      discourse_topic_management:
+        title: Permanently send this topic to the recycle bin.
+        delete_confirm: Are you sure you want to send this topic to the recycle bin? You will not be able to retrieve it.
