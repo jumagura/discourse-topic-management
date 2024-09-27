@@ -1,0 +1,5 @@
+en:
+  site_settings:
+    discourse_topic_management_enabled: "Enable Topic Management plugin."
+    discourse_topic_management_hidden_category_id: "Select the hidden category for moved topics."
+    discourse_topic_management_categories_remove_button_visible: "Select categories where the remove button should be visible."
