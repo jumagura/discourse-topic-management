@@ -12,9 +12,9 @@ export default {
         siteSettings.discourse_topic_management_categories_remove_button_visible.split(
           "|",
         );
-
       api.addPostMenuButton("trash", (post) => {
         if (
+          siteSettings.discourse_topic_management_hidden_category_id !== "" &&
           categories.includes(post.topic.category_id.toString()) &&
           post.post_number === 1 &&
           post.topicCreatedById === api.getCurrentUser().id
