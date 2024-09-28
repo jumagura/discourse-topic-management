@@ -1,5 +1,8 @@
 en:
   site_settings:
-    discourse_topic_management_enabled: "Enable Topic Management plugin."
-    discourse_topic_management_hidden_category_id: "Select the hidden category for moved topics."
-    discourse_topic_management_categories_remove_button_visible: "Select categories where the remove button should be visible."
+    discourse_topic_management_enabled: "Enable the Topic Management plugin to apply custom topic management rules."
+    discourse_topic_management_hidden_category_id: "Select the hidden category where topics will be moved to."
+    discourse_topic_management_categories_remove_button_visible: "Select categories where the remove button should be visible for topic deletion."
+    discourse_topic_management_reply_limit: "Set the maximum number of unique repliers allowed per topic."
+    discourse_topic_management_limited_categories: "Select categories where reply limitations will be enforced."
+    discourse_topic_management_limited_tags: "Select tags that will apply reply limitations to topics."

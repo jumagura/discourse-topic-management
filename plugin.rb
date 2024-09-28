@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # name: discourse-topic-management
-# about: Adds a trash button to move topics to a hidden category
-# version: 0.2
+# about: Adds features for managing topics: Move topics to a hidden category and limit replies based on unique repliers, categories, or tags.
+# version: 0.3
 # authors: Marcos Gutierrez
 # url: https://github.com/your-repo/discourse-topic-management
 
@@ -26,9 +26,12 @@ after_initialize do
           if SiteSetting.discourse_topic_management_reply_limit.present? && topic
             unique_repliers = topic.posts.pluck(:user_id)
             limit = SiteSetting.discourse_topic_management_reply_limit.to_i
+            limited_categories = SiteSetting.discourse_topic_management_limited_categories.split("|").map(&:to_i)
+            limited_tags = SiteSetting.discourse_topic_management_limited_tags.split("|")
 
-            # If limit is reached, check if the user is allowed to continue posting
-            if unique_repliers.count >= limit &&
+            # Check if the topic is in a limited category or has limited tags
+            if (limited_categories.include?(topic.category_id) || (limited_tags & topic.tags.map(&:name)).present?) &&
+               unique_repliers.count >= limit &&
                !user.staff? && # Allow staff
                !unique_repliers.include?(user.id) # Allow original poster and existing repliers
               return false # Block any new repliers
