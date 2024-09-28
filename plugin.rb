@@ -2,7 +2,7 @@
 
 # name: discourse-topic-management
 # about: Adds a trash button to move topics to a hidden category
-# version: 0.1
+# version: 0.2
 # authors: Marcos Gutierrez
 # url: https://github.com/your-repo/discourse-topic-management
 
