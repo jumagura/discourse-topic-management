@@ -4,7 +4,8 @@
 # about: Adds features for managing topics: Move topics to a hidden category and limit replies based on unique repliers, categories, or tags.
 # version: 0.3.1
 # authors: Marcos Gutierrez
-# url: https://github.com/your-repo/discourse-topic-management
+# contact_emails: jumagura@pavilion.tech
+# url: https://github.com/jumagura/discourse-topic-management
 
 enabled_site_setting :discourse_topic_management_enabled
 
