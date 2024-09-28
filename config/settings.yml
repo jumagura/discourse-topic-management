@@ -9,13 +9,11 @@ plugins:
     type: category_list
     client: true
     default: ""
-  discourse_topic_management_reply_limit:
-    default: 5
-  discourse_topic_management_limited_categories:
-    type: category_list
-    client: true
-    default: ""
-  discourse_topic_management_limited_tags:
+  discourse_topic_management_category_limits:
     type: list
-    client: true
+    client: false
+    default: ""
+  discourse_topic_management_tag_limits:
+    type: list
+    client: false
     default: ""

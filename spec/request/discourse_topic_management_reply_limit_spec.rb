@@ -15,9 +15,8 @@ RSpec.describe "Reply Limitation Feature", type: :request do
 
   before do
     SiteSetting.discourse_topic_management_enabled = true
-    SiteSetting.discourse_topic_management_reply_limit = 3
-    SiteSetting.discourse_topic_management_limited_categories = "#{limited_category.id}"
-    SiteSetting.discourse_topic_management_limited_tags = tag.name
+    SiteSetting.discourse_topic_management_category_limits = "#{limited_category.id}:3|123:10|456:10"
+    SiteSetting.discourse_topic_management_tag_limits = "#{tag.name}:3|tag_newewerwrer:2|contest_tag_123:35"
   end
 
   context "when the topic is in a limited category" do
