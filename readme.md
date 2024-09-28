@@ -10,6 +10,6 @@ The **Discourse Topic Management Plugin** provides enhanced functionality for ma
    - **Only staff** can see and access the hidden category. The topic owner and regular users cannot access or retrieve topics moved to this category.
 
 2. **Reply Limit on Topics**:
-   - Admins can set a reply limit for topics based on the category or hashtag (e.g., #SummerFunContest).
+   - Admins can set a reply limit for topics based on the category or hashtag (e.g., SummerFunContest).
    - Once the limit is reached, only the original poster, staff, moderators, and existing repliers can continue to reply.
    - New users who haven't replied yet will have the reply button hidden and will see a message indicating the reply limit has been reached.
