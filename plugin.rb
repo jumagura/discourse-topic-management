@@ -14,4 +14,32 @@ after_initialize do
   Discourse::Application.routes.append do
     post "/move_topic_to_hidden_category" => "move_topic#move_to_hidden_category"
   end
+
+  module DiscourseTopicManagement
+    module PostGuardianExtension
+      extend ActiveSupport::Concern
+
+      prepended do
+        alias_method :existing_can_create_post_in_topic?, :can_create_post_in_topic?
+
+        def can_create_post_in_topic?(topic)
+          if SiteSetting.discourse_topic_management_reply_limit.present? && topic
+            unique_repliers = topic.posts.pluck(:user_id)
+            limit = SiteSetting.discourse_topic_management_reply_limit.to_i
+
+            # If limit is reached, check if the user is allowed to continue posting
+            if unique_repliers.count >= limit &&
+               !user.staff? && # Allow staff
+               !unique_repliers.include?(user.id) # Allow original poster and existing repliers
+              return false # Block any new repliers
+            end
+          end
+
+          existing_can_create_post_in_topic?(topic)
+        end
+      end
+    end
+  end
+
+  PostGuardian.prepend(DiscourseTopicManagement::PostGuardianExtension)
 end

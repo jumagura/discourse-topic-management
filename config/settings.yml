@@ -9,3 +9,5 @@ plugins:
     type: category_list
     client: true
     default: ""
+  discourse_topic_management_reply_limit:
+    default: 5
