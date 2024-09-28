@@ -187,4 +187,31 @@ RSpec.describe "Reply Limitation Feature", type: :request do
       expect(response.status).to eq(200)
     end
   end
+  context "when the discourse_topic_management_enabled is set to false" do
+    before do
+      SiteSetting.discourse_topic_management_enabled = false
+    end
+
+    it "does not enforce the reply limit on topics in limited categories" do
+      Fabricate(:post, user: topic_owner, topic: limited_topic_with_category)
+      Fabricate(:post, user: regular_user, topic: limited_topic_with_category)
+      Fabricate(:post, user: second_regular_user, topic: limited_topic_with_category)
+
+      sign_in(third_regular_user)
+      post "/posts.json", params: { raw: "This is a reply", topic_id: limited_topic_with_category.id }
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+    end
+
+    it "does not enforce the reply limit on topics with limited tags" do
+      Fabricate(:post, user: topic_owner, topic: limited_topic_with_tag)
+      Fabricate(:post, user: regular_user, topic: limited_topic_with_tag)
+      Fabricate(:post, user: second_regular_user, topic: limited_topic_with_tag)
+
+      sign_in(third_regular_user)
+      post "/posts.json", params: { raw: "This is a reply", topic_id: limited_topic_with_tag.id }
+      expect(response).to be_successful
+      expect(response.status).to eq(200)
+    end
+  end
 end

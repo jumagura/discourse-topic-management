@@ -2,7 +2,7 @@
 
 # name: discourse-topic-management
 # about: Adds features for managing topics: Move topics to a hidden category and limit replies based on unique repliers, categories, or tags.
-# version: 0.3
+# version: 0.3.1
 # authors: Marcos Gutierrez
 # url: https://github.com/your-repo/discourse-topic-management
 
@@ -23,7 +23,7 @@ after_initialize do
         alias_method :existing_can_create_post_in_topic?, :can_create_post_in_topic?
 
         def can_create_post_in_topic?(topic)
-          if SiteSetting.discourse_topic_management_reply_limit.present? && topic
+          if SiteSetting.discourse_topic_management_enabled && SiteSetting.discourse_topic_management_reply_limit.present? && topic
             unique_repliers = topic.posts.pluck(:user_id)
             limit = SiteSetting.discourse_topic_management_reply_limit.to_i
             limited_categories = SiteSetting.discourse_topic_management_limited_categories.split("|").map(&:to_i)
