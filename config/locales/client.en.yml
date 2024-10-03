@@ -1,6 +1,10 @@
 en:
   js:
-    topic:
-      discourse_topic_management:
+    discourse_topic_management:
+      topic:
         title: Permanently send this topic to the recycle bin.
         delete_confirm: Are you sure you want to send this topic to the recycle bin? You will not be able to retrieve it.
+      topic_list:
+        limit_reached:
+          message: "This post is fully reviewed"
+          title: "This topic can no longer receive new replies."

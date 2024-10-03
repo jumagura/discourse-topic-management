@@ -17,3 +17,33 @@ plugins:
     type: list
     client: false
     default: ""
+  discourse_topic_notification_color:
+    type: enum
+    client: true
+    default: "--secondary"
+    choices:
+      - "--primary"
+      - "--secondary"
+      - "--tertiary"
+      - "--quaternary"
+      - "--header_background"
+      - "--header_primary"
+      - "--highlight"
+      - "--danger"
+      - "--success"
+      - "--love"
+  discourse_topic_notification_background_color:
+    type: enum
+    client: true
+    default: "--tertiary"
+    choices:
+      - "--primary"
+      - "--secondary"
+      - "--tertiary"
+      - "--quaternary"
+      - "--header_background"
+      - "--header_primary"
+      - "--highlight"
+      - "--danger"
+      - "--success"
+      - "--love"

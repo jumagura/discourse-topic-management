@@ -5,3 +5,5 @@ en:
     discourse_topic_management_categories_remove_button_visible: "Select categories where the remove button should be visible for topic deletion."
     discourse_topic_management_category_limits: "Set the maximum number of unique repliers for specific categories. \n\nFormat: 'category_id:limit' (e.g. '1:5')"
     discourse_topic_management_tag_limits: "Set the maximum number of unique repliers for specific tags. \n\nFormat: 'tag_name:limit' (e.g. 'contest_tag:2')."
+    discourse_topic_notification_color: "Select the font color for notification badges."
+    discourse_topic_notification_background_color: "Select the background color for notification badges."

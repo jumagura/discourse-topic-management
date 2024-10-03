@@ -23,7 +23,7 @@ export default {
             action: "sendTopicToRecycleBin",
             icon: "box-archive",
             className: "topic-management-button",
-            title: "topic.discourse_topic_management.title",
+            title: "discourse_topic_management.topic.title",
           };
         }
       });
@@ -32,7 +32,7 @@ export default {
         const topicId = this.attrs.topicId;
         const categoryId = this.attrs.topic.category_id;
         this.dialog.yesNoConfirm({
-          message: I18n.t("topic.discourse_topic_management.delete_confirm"),
+          message: I18n.t("discourse_topic_management.topic.delete_confirm"),
           didConfirm: () => {
             ajax(`/move_topic_to_hidden_category`, {
               method: "POST",

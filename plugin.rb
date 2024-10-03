@@ -55,4 +55,37 @@ after_initialize do
   end
 
   PostGuardian.prepend(DiscourseTopicManagement::PostGuardianExtension)
+
+  module TopicTitleLimitReachedNotification
+    def limit_reached
+      unique_repliers = topic.posts.pluck(:user_id)
+      category_limits = SiteSetting.discourse_topic_management_category_limits.split("|").map { |pair| pair.split(":") }.to_h
+      category_limit = category_limits[topic.category_id.to_s].to_i if category_limits[topic.category_id.to_s]
+
+      # Parsing tag limits
+      tag_limits = SiteSetting.discourse_topic_management_tag_limits.split("|").map { |pair| pair.split(":") }.to_h
+      tag_limit = nil
+      topic.tags.each do |tag|
+        tag_limit = tag_limits[tag.name].to_i if tag_limits[tag.name]
+        break if tag_limit
+      end
+      limit = tag_limit || category_limit
+      user = self&.scope&.user
+      return false if !user
+      if limit && unique_repliers.count >= limit && !user.staff? && !unique_repliers.include?(user.id)
+        return true
+      end
+      false
+    end
+  end
+
+  class ::TopicListItemSerializer
+    prepend TopicTitleLimitReachedNotification
+    attributes :limit_reached
+  end
+
+  class ::TopicViewSerializer
+    prepend TopicTitleLimitReachedNotification
+    attributes :limit_reached
+  end
 end
