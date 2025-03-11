@@ -1,0 +1,27 @@
+<div class="post-list user-stream">
+  {{#each this.archivedTopics.archived_topics as |topic|}}
+    <div class="post-list-item user-stream-item">
+      <div class="post-list-item__header info">
+        <div class="post-list-item__details">
+          <div class="stream-topic-title">
+            <span class="title">
+
+              <LinkTo @route="topic" @models={{array topic.[5] topic.[0]}}>
+                {{replace-emoji (html-safe topic.[3])}}
+              </LinkTo>
+            </span>
+          </div>
+          <div class="post-list-item__metadata">
+            <span class="time">
+              {{format-date topic.[4]}}
+
+            </span>
+          </div>
+        </div>
+      </div>
+      <div data-topic-id={{topic.[0]}}>
+        <div class="cooked">{{topic.[2]}}</div>
+      </div>
+    </div>
+  {{/each}}
+</div>
