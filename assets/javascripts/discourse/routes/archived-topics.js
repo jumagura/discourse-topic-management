@@ -18,8 +18,6 @@ export default DiscourseRoute.extend({
         error: model.error,
       });
     } else {
-      console.log(typeof model[0]);
-
       controller.setProperties({
         archivedTopics: model[0],
       });
