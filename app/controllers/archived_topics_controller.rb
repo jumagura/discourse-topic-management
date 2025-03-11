@@ -2,7 +2,7 @@
 
 class ArchivedTopicsController < ::ApplicationController
   requires_plugin DiscourseTopicManagement::PLUGIN_NAME
-  before_action :set_view_path
+  before_action :ensure_logged_in, :set_view_path
 
   def index
     user = fetch_user
