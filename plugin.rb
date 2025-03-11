@@ -2,7 +2,7 @@
 
 # name: discourse-topic-management
 # about: Adds features for managing topics: Move topics to a hidden category and limit replies based on unique repliers, categories, or tags.
-# version: 0.3.1
+# version: 0.4.0
 # authors: Marcos Gutierrez
 # contact_emails: jumagura@pavilion.tech
 # url: https://github.com/jumagura/discourse-topic-management
@@ -10,10 +10,18 @@
 enabled_site_setting :discourse_topic_management_enabled
 
 after_initialize do
-  load File.expand_path("../app/controllers/move_topic_controller.rb", __FILE__)
+  %w[
+    ../lib/engine.rb
+    ../app/controllers/move_topic_controller.rb
+    ../app/controllers/archived_topics_controller.rb
+    ../app/serializers/archived_topics_serializer.rb
+  ].each do |path|
+    load File.expand_path(path, __FILE__)
+  end
 
   Discourse::Application.routes.append do
     post "/move_topic_to_hidden_category" => "move_topic#move_to_hidden_category"
+    get "/u/:username/archived-topics" => "archived_topics#index", constraints: { username: RouteFormat.username }
   end
 
   module DiscourseTopicManagement
@@ -88,4 +96,17 @@ after_initialize do
     prepend TopicTitleLimitReachedNotification
     attributes :limit_reached
   end
+
+  module TopicManagementTopicGuardianExtension
+    def can_see_topic?(topic, hide_deleted = true)
+      hidden_category_id = SiteSetting.discourse_topic_management_hidden_category_id.to_i
+      # Allow user to see unlisted topics if they own the topic and it's in the hidden category
+      if topic&.category_id == hidden_category_id && topic&.user_id == @user&.id
+        return true
+      end
+      super
+    end
+  end
+
+  Guardian.prepend TopicManagementTopicGuardianExtension
 end
