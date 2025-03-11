@@ -21,6 +21,7 @@ after_initialize do
 
   Discourse::Application.routes.append do
     post "/move_topic_to_hidden_category" => "move_topic#move_to_hidden_category"
+    post "/restore_topic_to_previous_category" => "move_topic#restore_to_previous_category"
     get "/u/:username/archived-topics" => "archived_topics#index", constraints: { username: RouteFormat.username }
   end
 

@@ -4,7 +4,12 @@ en:
       topic:
         title: Permanently send this topic to the recycle bin.
         delete_confirm: Are you sure you want to send this topic to the recycle bin? You will not be able to retrieve it.
+        title_restore: Restore the topic to its previous category.
+        restore_confirm: Are you sure you want to restore this topic to its previous category?
       topic_list:
         limit_reached:
           message: "This post is fully reviewed"
           title: "This topic can no longer receive new replies."
+  discourse_topic_management:
+    restore_not_posible: "Unable to restore topic. Please, contact support."
+    archive_not_posible: "Unauthorized or already in hidden category."
