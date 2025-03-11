@@ -10,6 +10,8 @@ en:
         limit_reached:
           message: "This post is fully reviewed"
           title: "This topic can no longer receive new replies."
+      archived_topics:
+        title: "Go to archived topics."
   discourse_topic_management:
     restore_not_posible: "Unable to restore topic. Please, contact support."
     archive_not_posible: "Unauthorized or already in hidden category."
