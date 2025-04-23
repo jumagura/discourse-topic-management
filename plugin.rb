@@ -67,7 +67,7 @@ after_initialize do
 
   module TopicTitleLimitReachedNotification
     def limit_reached
-      unique_repliers = topic.posts.pluck(:user_id)
+      unique_repliers = topic.posts.pluck(:user_id).uniq
       category_limits = SiteSetting.discourse_topic_management_category_limits.split("|").map { |pair| pair.split(":") }.to_h
       category_limit = category_limits[topic.category_id.to_s].to_i if category_limits[topic.category_id.to_s]
 
