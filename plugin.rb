@@ -67,7 +67,7 @@ after_initialize do
 
   module TopicTitleLimitReachedNotification
     def limit_reached
-      unique_repliers = topic.posts.pluck(:user_id) - 1
+      unique_repliers = topic.posts.pluck(:user_id)
       category_limits = SiteSetting.discourse_topic_management_category_limits.split("|").map { |pair| pair.split(":") }.to_h
       category_limit = category_limits[topic.category_id.to_s].to_i if category_limits[topic.category_id.to_s]
 
@@ -81,7 +81,7 @@ after_initialize do
       limit = tag_limit || category_limit
       user = self&.scope&.user
       return false if !user
-      if limit && unique_repliers.count >= limit && !user.staff? && !unique_repliers.include?(user.id)
+      if limit && unique_repliers.count -1  >= limit && !user.staff? && !unique_repliers.include?(user.id)
         return true
       end
       false
