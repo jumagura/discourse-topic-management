@@ -81,7 +81,7 @@ after_initialize do
       limit = tag_limit || category_limit
       user = self&.scope&.user
       return false if !user
-      if limit && unique_repliers.count -1  >= limit && !user.staff? && !unique_repliers.include?(user.id)
+      if limit && unique_repliers.count - 1 >= limit && !user.staff? && !unique_repliers.include?(user.id)
         return true
       end
       false
