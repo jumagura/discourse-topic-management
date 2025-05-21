@@ -34,7 +34,7 @@ after_initialize do
 
         def can_create_post_in_topic?(topic)
           if SiteSetting.discourse_topic_management_enabled && topic
-            unique_repliers = topic.posts.pluck(:user_id)
+            unique_repliers = topic.posts.pluck(:user_id).uniq
 
             # Parsing category limits
             category_limits = SiteSetting.discourse_topic_management_category_limits.split("|").map { |pair| pair.split(":") }.to_h
@@ -52,7 +52,7 @@ after_initialize do
             limit = tag_limit || category_limit
 
             # Skip reply limitation if no limit is set for the category or tag
-            if limit && unique_repliers.count >= limit && !user.staff? && !unique_repliers.include?(user.id)
+            if limit && unique_repliers.count - 1 >= limit && !user.staff? && !unique_repliers.include?(user.id)
               return false # Block new repliers if the limit is reached
             end
           end
