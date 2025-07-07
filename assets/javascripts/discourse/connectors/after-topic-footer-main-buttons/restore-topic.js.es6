@@ -11,6 +11,6 @@ export default {
       currentUser.moderator ||
       args.topic.user_id === currentUser.id;
 
-    return args.topic.category_id.toString() == hidden_category && userAllowed;
+    return args.topic.category_id?.toString() == hidden_category && userAllowed;
   },
 };
