@@ -18,7 +18,7 @@ export default {
 
     return (
       destination_category !== "" &&
-      categories.includes(args.topic.category_id.toString()) &&
+      categories.includes(args.topic.category_id?.toString()) &&
       userAllowed
     );
   },
